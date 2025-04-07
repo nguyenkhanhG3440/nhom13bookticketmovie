@@ -77,5 +77,5 @@ app.get('/movie/:id', (req, res) => {
   res.render('movie-details', { movie });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`🚀 Server chạy trên http://localhost:${PORT}`));
