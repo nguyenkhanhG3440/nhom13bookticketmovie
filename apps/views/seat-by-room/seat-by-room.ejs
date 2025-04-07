@@ -1,0 +1,75 @@
+<%- include('../partials/header') %>
+
+<div class="container my-5">
+    <h2 class="mb-4 text-center text-light">🎬 Danh sách Ghế Theo Phòng Chiếu</h2>
+
+    <div class="card bg-dark shadow">
+        <div class="card-body p-0">
+            <table class="table table-dark table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">🏠 Tên phòng</th>
+                        <th scope="col">💺 Mã ghế</th>
+                        <th scope="col">📌 Trạng thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% danhSachChiTietPhongChieu.forEach(item => { %>
+                        <tr>
+                            <td><%= item.phong ? item.phong.tenPhong : '<span class="text-muted">Không có dữ liệu</span>' %></td>
+                            <td><%= item.ghe ? item.ghe.maGhe : '<span class="text-muted">Không có dữ liệu</span>' %></td>
+                            <td>
+                                <% if (item.trangThai === 'Đã đặt') { %>
+                                    <span class="badge bg-danger">Đã đặt</span>
+                                <% } else if (item.trangThai === 'Đang chọn') { %>
+                                    <span class="badge bg-warning text-dark">Đang chọn</span>
+                                <% } else { %>
+                                    <span class="badge bg-success">Chưa đặt</span>
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>
+
+<style>
+    body {
+        background-color: #141414;
+    }
+
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    h2 {
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .table th,
+    .table td {
+        vertical-align: middle;
+        text-align: center;
+        font-size: 16px;
+        padding: 12px 15px;
+    }
+
+    .badge {
+        font-size: 0.9em;
+        padding: 6px 12px;
+        border-radius: 10px;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #1f1f1f;
+        transition: background-color 0.2s ease;
+    }
+</style>

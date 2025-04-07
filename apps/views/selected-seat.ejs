@@ -1,0 +1,72 @@
+<%- include('partials/header') %>
+
+<div class="container text-center mt-5">
+    <h2 class="text-white">🎟️ Chọn ghế: <%= movie.title %> - Phòng: <%= phong.tenPhong %></h2>
+
+    <div class="seat-container my-4">
+        <% danhSachGhe.forEach((item, index) => { %>
+            <div class="seat <%= item.trangThai === 'Đã đặt' ? 'booked' : 'available' %>" 
+                 data-seat-id="<%= item.ghe._id %>"
+                 onclick="handleSeatClick(this, '<%= item.trangThai %>')">
+                <%= item.ghe.maGhe %>
+            </div>
+            <% if ((index + 1) % 5 === 0) { %><br><% } %>
+        <% }) %>
+    </div>
+
+    <button class="btn btn-primary" id="btnConfirm">🎯 Xác nhận chọn ghế</button>
+</div>
+
+<script>
+const selectedSeats = [];
+
+function handleSeatClick(el, trangThai) {
+    if (trangThai === 'Đã đặt') return;
+    const seatId = el.getAttribute('data-seat-id');
+    const idx = selectedSeats.indexOf(seatId);
+
+    if (idx === -1) {
+        selectedSeats.push(seatId);
+        el.classList.add('selecting');
+    } else {
+        selectedSeats.splice(idx, 1);
+        el.classList.remove('selecting');
+    }
+}
+
+document.getElementById('btnConfirm').onclick = () => {
+    if (selectedSeats.length === 0) return alert('Chọn ít nhất 1 ghế.');
+
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = '/home/confirm-booking';
+
+    const inputs = {
+        phimId: '<%= movie._id %>',
+        rapId: '<%= rap._id %>',
+        phongId: '<%= phong._id %>',
+        suatChieuId: '<%= suatChieu._id %>',
+        danhSachGhe: JSON.stringify(selectedSeats)
+    };
+
+    Object.entries(inputs).forEach(([name, value]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = name;
+        input.value = value;
+        form.appendChild(input);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
+};
+</script>
+
+<style>
+.seat { width:60px;height:60px;margin:8px;display:inline-flex;align-items:center;justify-content:center;color:#fff;border-radius:6px;cursor:pointer;}
+.available {background:#2ecc71;}
+.booked {background:#e74c3c;cursor:not-allowed;}
+.selecting {background:#f1c40f;color:#000;}
+</style>
+
+<%- include('partials/footer') %>

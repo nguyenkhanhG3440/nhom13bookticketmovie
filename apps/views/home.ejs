@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeJS Play - Trang Chủ</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        /* Carousel */
+        .carousel-inner img {
+            border-radius: 20px;
+            height: 600px;
+            object-fit: cover;
+        }
+
+        .carousel-caption {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        /* Section title */
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 30px 0 15px;
+            border-left: 5px solid #ffc107;
+            padding-left: 10px;
+        }
+
+        /* Movie card */
+        .movie-card {
+            background-color: transparent;
+            border: none;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .movie-img {
+            width: 300px;
+            height: 480px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .movie-img:hover {
+            transform: scale(1.05);
+        }
+
+        .movie-title {
+            font-size: 1rem;
+            font-weight: 500;
+            background-color: transparent;
+            color: #fff;
+            margin-top: 10px;
+            text-align: center;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 2.6em;
+        }
+
+        .card-body {
+            background-color: transparent !important;
+            padding: 0.5rem;
+        }
+
+        /* Nút Thêm phim */
+        .add-movie-btn {
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .add-movie-btn:hover {
+            background: linear-gradient(90deg, #0056b3, #003d80);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header_home">
+        <%- include('partials/header'); %>
+    </div>
+
+    <div class="container mt-4">
+        <% if (success) { %>
+            <div class="alert alert-success text-center">
+                <%= success %>
+            </div>
+        <% } %>
+
+        <!-- 🎥 Carousel Banner -->
+        <div id="highlightCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/images/banners/TheArtOfNegotiation_banner.jpg" class="d-block w-100" alt="Banner 1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Phim Hành Động Đặc Sắc</h5>
+                        <p>Bom tấn không thể bỏ lỡ 2025</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/banners/TheScandalOfChunhwa_banner.jpg" class="d-block w-100" alt="Banner 2">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Đam Mê & Cảm Hứng</h5>
+                        <p>Trải nghiệm những câu chuyện cảm động</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#highlightCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#highlightCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+
+        <!-- 🎬 Danh sách phim đề xuất -->
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="section-title text-white">🎬 Phim đề xuất</div>
+            <% if (user && user.role === 'admin') { %>
+                <a href="/admin/phim/add" class="add-movie-btn">
+                    <i class="fas fa-plus me-2"></i>Thêm phim
+                </a>
+            <% } %>
+        </div>
+        <% if (movies && movies.length > 0) { %>
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                <% movies.forEach(movie => { %>
+                    <div class="col d-flex justify-content-center">
+                        <div class="movie-card text-center">
+                            <a href="/home/movie-details/<%= movie._id %>">
+                                <img src="<%= movie.posterUrl %>" alt="<%= movie.title %>" class="movie-img">
+                            </a>
+                            <div class="movie-title mt-2">
+                                <%= movie.title %>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        <% } else { %>
+            <div class="alert alert-warning text-center">Không có phim nào để hiển thị.</div>
+        <% } %>
+    </div>
+
+    <!-- Footer -->
+    <%- include('partials/footer'); %>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        setTimeout(() => {
+            const alert = document.querySelector('.alert-success');
+            if (alert) alert.style.display = 'none';
+        }, 3000);
+    </script>
+</body>
+
+</html>

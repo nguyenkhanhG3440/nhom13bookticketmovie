@@ -1,0 +1,206 @@
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        /* Chiều cao tối thiểu = 100% màn hình */
+        margin: 0;
+    }
+
+    /* Footer Styles */
+    footer {
+        background-color: #1a1a1a;
+        /* Màu tối giống Galaxy Play */
+        color: #b3b3b3;
+        padding: 3rem 0;
+        margin-top: auto;
+        width: 100%;
+    }
+
+    footer .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        /* Phân bố đều các section */
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .footer-section {
+        flex: 1;
+        /* Mỗi section chiếm không gian đều nhau */
+        text-align: left;
+        /* Căn trái giống Galaxy Play */
+        min-width: 200px;
+        /* Đảm bảo không bị co quá nhỏ */
+        max-width: 250px;
+        /* Giới hạn chiều rộng để cân đối */
+    }
+
+    .footer-logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 0.5rem;
+    }
+
+    footer h5 {
+        font-size: 1rem;
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+    }
+
+    footer p {
+        font-size: 0.9rem;
+        color: #b3b3b3;
+        margin-bottom: 0.3rem;
+    }
+
+    .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .footer-links li {
+        margin-bottom: 0.3rem;
+    }
+
+    .footer-links a {
+        color: #b3b3b3;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+        color: #e50914;
+    }
+
+    .app-links {
+        display: flex;
+        flex-wrap: wrap;
+        /* Cho phép xuống dòng nếu không đủ chỗ */
+        gap: 0.5rem;
+    }
+
+    .app-store-img {
+        width: 100px;
+        height: 35px;
+        object-fit: contain;
+    }
+
+    /* Kết nối (Giữ nguyên vị trí dưới cùng) */
+    .social-section {
+        text-align: center;
+    }
+
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .social-icon {
+        width: 25px;
+        height: 25px;
+        object-fit: contain;
+    }
+
+    .certification img {
+        width: 100px;
+        height: auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .footer-content {
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .footer-section {
+            text-align: center;
+            max-width: 100%;
+            /* Trên mobile, bỏ giới hạn chiều rộng */
+        }
+
+        .app-links,
+        .social-links {
+            justify-content: center;
+        }
+    }
+</style>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <!-- Thông tin công ty -->
+            <div class="footer-section">
+                <h5 class="footer-logo">Bờ Rô Dev</h5>
+                <p>© 2025 Bờ Rô Dev. All rights reserved.</p>
+            </div>
+
+            <!-- Giới thiệu -->
+            <div class="footer-section">
+                <h5>Giới Thiệu</h5>
+                <ul class="footer-links">
+                    <li><a href="/terms">Quy chế sử dụng Dịch vụ</a></li>
+                    <li><a href="/privacy">Chính sách bảo mật</a></li>
+                    <li><a href="/promotions">Khuyến mãi</a></li>
+                </ul>
+            </div>
+
+            <!-- Hỗ trợ -->
+            <div class="footer-section">
+                <h5>Hỗ Trợ</h5>
+                <p>Hotline: 1900 8675 (24/7)</p>
+                <p>Email: <a href="mailto:play@borodev.vn">play@borodev.vn</a></p>
+                <p>Website: <a href="https://borodev.vn/help">https://borodev.vn/help</a></p>
+            </div>
+
+            <!-- Tải ứng dụng -->
+            <div class="footer-section">
+                <h5>Tải Ứng Dụng</h5>
+                <div class="app-links">
+                    <a href="https://play.google.com/store/apps/details?id=com.galaxystudio.play" target="_blank">
+                        <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png?hl=vi"
+                            alt="Google Play" class="app-store-img">
+                    </a>
+                    <a href="https://apps.apple.com/vn/app/galaxy-play/id1081596855" target="_blank">
+                        <img src="/images/footer_header/appstore.png" alt="App Store" class="app-store-img">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kết nối (Giữ nguyên vị trí dưới cùng) -->
+        <div class="social-section text-center mt-4">
+            <h5>Kết Nối Với Chúng Tôi</h5>
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank">
+                    <i class="fa-brands fa-facebook-f social-icon"></i>
+                </a>
+                <a href="https://youtube.com" target="_blank">
+                    <i class="fa-brands fa-youtube social-icon"></i>
+                </a>
+                <a href="https://zalo.me" target="_blank">
+                    <i class="fa-solid fa-comment-dots social-icon"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Chứng nhận -->
+        <div class="certification text-center mt-3">
+            <h14>fsdhfkjdsfjdsjfljkdjfsdjk</h10>>
+        </div>
+    </div>
+
+</footer>
