@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+
+<div class="container mt-5">
+    <h2 class="text-white">🎬 Đặt vé phim: <%= movie.title %></h2>
+    <img src="<%= movie.posterUrl %>" alt="<%= movie.title %>" style="max-width:200px;" class="mb-4">
+
+    <table class="table table-dark table-bordered">
+        <thead>
+            <tr>
+                <th>Rạp</th>
+                <th>Phòng</th>
+                <th>Suất Chiếu</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% selectedMovieTheaterRoom.forEach(item => { %>
+                <tr>
+                    <td><%= item.rap.ten %></td>
+                    <td><%= item.phong.tenPhong %></td>
+                    <td>
+                        Bắt đầu: <%= new Date(item.suatChieu.ngayGioBatDau).toLocaleString('vi-VN') %><br>
+                        Kết thúc: <%= new Date(item.suatChieu.ngayGioKetThuc).toLocaleString('vi-VN') %>
+                    </td>
+                    <td>
+                        <a href="/home/selected-seat/<%= item.phong._id %>" class="btn btn-danger">Chọn ghế</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('partials/footer') %>

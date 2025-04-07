@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Đăng Nhập</title>
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Font Awesome (cho icon nếu cần) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2Lw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            /* Hình nền đẹp */
+            background: url('/images/background_login_register/background.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 100px; /* Để không bị header che */
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+            position: relative;
+        }
+
+        /* Lớp phủ tối (overlay) 
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }*/
+
+        main {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .login-container {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 50px; /* Tăng padding để form to hơn */
+            border-radius: 20px; /* Bo góc lớn hơn */
+            box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.8);
+            max-width: 800px; /* Tăng chiều rộng tối đa */
+            width: 100%;
+            max-height: 600px;
+            height: 100%;
+            margin: 0 auto;
+            transition: transform 0.3s ease;
+        }
+
+        .login-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .login-container h2 {
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            font-size: 2rem; /* Tăng kích thước tiêu đề */
+        }
+
+        .form-label {
+            color: #b3b3b3;
+            font-size: 1rem; /* Tăng kích thước nhãn */
+        }
+
+        .form-control {
+            background: #3a3a3a;
+            border: none;
+            border-radius: 10px; /* Bo góc lớn hơn */
+            color: #fff;
+            padding: 15px; /* Tăng padding input */
+            font-size: 1.1rem; /* Tăng kích thước chữ trong input */
+            transition: box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+            background: #3a3a3a;
+            color: #fff;
+            outline: none;
+        }
+
+        .form-control::placeholder {
+            color: #b3b3b3;
+            font-size: 1.1rem; /* Tăng kích thước placeholder */
+        }
+
+        .btn-primary {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            background: #e50914 !important;
+            border: none;
+            border-radius: 10px;
+            padding: 15px; /* Tăng padding nút */
+            font-weight: bold;
+            font-size: 1.2rem; /* Tăng kích thước chữ nút */
+            width: 100%;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #f40612;
+            transform: translateY(-2px);
+        }
+
+        .alert-danger {
+            background: rgba(229, 9, 20, 0.1);
+            color: #e50914;
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 1rem; /* Tăng kích thước thông báo lỗi */
+            text-align: center;
+        }
+
+        .text-center a {
+            color: #e50914;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem; /* Tăng kích thước liên kết */
+            transition: color 0.3s ease;
+        }
+
+        .text-center a:hover {
+            color: #f40612;
+        }
+
+        /* Responsive */
+        @media (max-width: 576px) {
+            .login-container {
+                padding: 30px; /* Giảm padding trên mobile */
+                max-width: 90%;
+            }
+
+            .login-container h2 {
+                font-size: 1.8rem; /* Giảm kích thước tiêu đề trên mobile */
+            }
+
+            .form-label {
+                font-size: 0.9rem;
+            }
+
+            .form-control {
+                padding: 12px;
+                font-size: 1rem;
+            }
+
+            .form-control::placeholder {
+                font-size: 1rem;
+            }
+
+            .btn-primary {
+                padding: 12px;
+                font-size: 1.1rem;
+            }
+
+            .text-center a {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 🧩 Gắn header dùng include -->
+    <%- include('partials/header'); %>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Form đăng nhập giữa màn hình -->
+        <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+            <div class="login-container">
+                <h2 class="text-center mb-4">Đăng Nhập</h2>
+
+                <% if (message) { %>
+                    <div class="alert alert-danger"><%= message %></div>
+                <% } %>
+                
+
+                <form action="/auth/dangnhap" method="POST" onsubmit="return validatePassword()">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="Nhập email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="matKhau" class="form-label">Mật khẩu:</label>
+                        <input type="password" name="matKhau" id="matKhau" class="form-control" placeholder="Nhập mật khẩu" required>
+                    </div>
+                    <div id="error-msg" style="color: red;"></div>
+                    <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                </form>
+
+                <p class="text-center mt-3">
+                    Chưa có tài khoản? <a href="/auth/dangky" class="text-primary">Đăng ký</a>
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 🧩 Gắn footer dùng include (nếu có) -->
+    <%- include('partials/footer'); %>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<script>
+    function validatePassword() {
+        const password = document.getElementById("matKhau").value;
+        const errorMsg = document.getElementById("error-msg");
+
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+        const isLongEnough = password.length > 6;
+
+        if (!hasUpperCase || !hasSpecialChar || !isLongEnough) {
+            errorMsg.innerText = "Mật khẩu phải có ít nhất 1 chữ hoa, 1 ký tự đặc biệt và dài hơn 6 ký tự.";
+            return false;
+        }
+
+        errorMsg.innerText = ""; // Xóa thông báo lỗi nếu hợp lệ
+        return true;
+    }
+</script>

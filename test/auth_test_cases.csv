@@ -1,0 +1,55 @@
+STT,Testcase ID,Sub-Module,Testcase Summary,Priority,Pre-condition,Pre-steps,Step by step,Expected Result,Actual Result,Test Result,Note
+1,TC_AUTH_001,Đăng ký,Đăng ký thành công với thông tin hợp lệ,High,"- Chưa đăng nhập","1. Truy cập trang /auth/dangky","1. Nhập thông tin:
+- Họ tên: Nguyễn Văn A
+- Email: test@example.com
+- Mật khẩu: Test@123
+- Xác nhận mật khẩu: Test@123
+- Số điện thoại: 0123456789
+- Ngày sinh: 01/01/2000
+- Giới tính: Nam
+2. Click nút ""Đăng Ký""","1. Hiển thị thông báo ""Đăng ký thành công""
+2. Redirect về trang đăng nhập",,,
+2,TC_AUTH_002,Đăng ký,Đăng ký thất bại do email đã tồn tại,High,"- Email test@example.com đã tồn tại","1. Truy cập trang /auth/dangky","1. Nhập thông tin với email test@example.com
+2. Click nút ""Đăng Ký""","1. Hiển thị thông báo ""Email đã tồn tại""
+2. Vẫn ở lại trang đăng ký",,,
+3,TC_AUTH_003,Đăng ký,Đăng ký thất bại do mật khẩu không đủ mạnh,High,"- Chưa đăng nhập","1. Truy cập trang /auth/dangky","1. Nhập thông tin với mật khẩu yếu (ví dụ: 123456)
+2. Click nút ""Đăng Ký""","1. Hiển thị thông báo ""Mật khẩu phải có ít nhất 6 ký tự, 1 chữ hoa và 1 ký tự đặc biệt""
+2. Vẫn ở lại trang đăng ký",,,
+4,TC_AUTH_004,Đăng ký,Đăng ký thất bại do mật khẩu không khớp,High,"- Chưa đăng nhập","1. Truy cập trang /auth/dangky","1. Nhập mật khẩu và xác nhận mật khẩu khác nhau
+2. Click nút ""Đăng Ký""","1. Hiển thị thông báo ""Mật khẩu và xác nhận mật khẩu không khớp""
+2. Vẫn ở lại trang đăng ký",,,
+5,TC_AUTH_005,Đăng ký,Đăng ký thất bại do số điện thoại không hợp lệ,High,"- Chưa đăng nhập","1. Truy cập trang /auth/dangky","1. Nhập số điện thoại không đúng 10 chữ số
+2. Click nút ""Đăng Ký""","1. Hiển thị thông báo ""Số điện thoại phải có đúng 10 chữ số""
+2. Vẫn ở lại trang đăng ký",,,
+6,TC_AUTH_006,Đăng ký,Đăng ký thất bại do email không hợp lệ,High,"- Chưa đăng nhập","1. Truy cập trang /auth/dangky","1. Nhập email không đúng định dạng
+2. Click nút ""Đăng Ký""","1. Hiển thị thông báo ""Email không hợp lệ""
+2. Vẫn ở lại trang đăng ký",,,
+7,TC_AUTH_007,Đăng ký,Đăng ký thất bại do thiếu thông tin bắt buộc,High,"- Chưa đăng nhập","1. Truy cập trang /auth/dangky","1. Bỏ trống một số trường bắt buộc
+2. Click nút ""Đăng Ký""","1. Hiển thị thông báo ""Vui lòng điền đầy đủ thông tin""
+2. Vẫn ở lại trang đăng ký",,,
+8,TC_AUTH_008,Đăng nhập,Đăng nhập thành công với email và mật khẩu đúng,High,"- Đã có tài khoản","1. Truy cập trang /auth/dangnhap","1. Nhập email và mật khẩu đúng
+2. Click nút ""Đăng nhập""","1. Hiển thị thông báo ""Đăng nhập thành công""
+2. Redirect về trang chủ
+3. Hiển thị thông tin người dùng",,,
+9,TC_AUTH_009,Đăng nhập,Đăng nhập thất bại do sai mật khẩu,High,"- Đã có tài khoản","1. Truy cập trang /auth/dangnhap","1. Nhập email đúng, mật khẩu sai
+2. Click nút ""Đăng nhập""","1. Hiển thị thông báo ""Email hoặc mật khẩu không đúng""
+2. Vẫn ở lại trang đăng nhập",,,
+10,TC_AUTH_010,Đăng nhập,Đăng nhập thất bại do email không tồn tại,High,"- Chưa có tài khoản","1. Truy cập trang /auth/dangnhap","1. Nhập email không tồn tại
+2. Click nút ""Đăng nhập""","1. Hiển thị thông báo ""Email hoặc mật khẩu không đúng""
+2. Vẫn ở lại trang đăng nhập",,,
+11,TC_AUTH_011,Đăng nhập,Đăng nhập thất bại do thiếu thông tin,High,"- Chưa đăng nhập","1. Truy cập trang /auth/dangnhap","1. Bỏ trống email hoặc mật khẩu
+2. Click nút ""Đăng nhập""","1. Hiển thị thông báo ""Vui lòng nhập đầy đủ thông tin""
+2. Vẫn ở lại trang đăng nhập",,,
+12,TC_AUTH_012,Đăng nhập,Đăng nhập thất bại do tài khoản bị khóa,High,"- Tài khoản đã bị khóa","1. Truy cập trang /auth/dangnhap","1. Nhập email và mật khẩu của tài khoản bị khóa
+2. Click nút ""Đăng nhập""","1. Hiển thị thông báo ""Tài khoản của bạn đã bị khóa""
+2. Vẫn ở lại trang đăng nhập",,,
+13,TC_AUTH_013,Đăng xuất,Đăng xuất thành công,High,"- Đã đăng nhập","1. Click vào nút ""Đăng xuất""","1. Xác nhận đăng xuất","1. Redirect về trang đăng nhập
+2. Session và cookie bị xóa",,,
+14,TC_AUTH_014,Đăng xuất,Đăng xuất và quay lại trang trước đó,High,"- Đã đăng nhập","1. Đang ở trang bất kỳ
+2. Click vào nút ""Đăng xuất""","1. Xác nhận đăng xuất","1. Redirect về trang đăng nhập
+2. Session và cookie bị xóa
+3. Sau khi đăng nhập lại, quay về trang trước đó",,,
+15,TC_AUTH_015,Đăng xuất,Đăng xuất và kiểm tra session,High,"- Đã đăng nhập","1. Click vào nút ""Đăng xuất""","1. Xác nhận đăng xuất
+2. Thử truy cập trang yêu cầu đăng nhập","1. Redirect về trang đăng nhập
+2. Không thể truy cập trang yêu cầu đăng nhập
+3. Session và cookie đã bị xóa",,, 

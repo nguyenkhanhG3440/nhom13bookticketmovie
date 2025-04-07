@@ -1,0 +1,127 @@
+STT,Testcase ID,Sub-Module,Testcase Summary,Priority,Pre-condition,Pre-steps,Step by step,Expected Result,Actual Result,Test Result,Note
+1,TC_AUTH_001,Đăng ký,Đăng ký thành công với thông tin hợp lệ,High,"- Chưa đăng nhập","1. Truy cập trang /auth/dangky","1. Nhập thông tin:
+- Họ tên: Nguyễn Văn A
+- Email: test@example.com
+- Mật khẩu: test123
+- Xác nhận mật khẩu: test123
+- Số điện thoại: 0123456789
+- Ngày sinh: 01/01/2000
+- Giới tính: Nam
+2. Click nút ""Đăng Ký""","1. Hiển thị thông báo ""Đăng ký thành công""
+2. Redirect về trang đăng nhập",,,
+2,TC_AUTH_002,Đăng ký,Đăng ký thất bại do email đã tồn tại,High,"- Email test@example.com đã tồn tại","1. Truy cập trang /auth/dangky","1. Nhập thông tin với email test@example.com
+2. Click nút ""Đăng Ký""","1. Hiển thị thông báo ""Email đã được sử dụng""
+2. Vẫn ở lại trang đăng ký",,,
+3,TC_AUTH_003,Đăng nhập,Đăng nhập thành công,High,"- Đã có tài khoản","1. Truy cập trang /auth/dangnhap","1. Nhập email và mật khẩu đúng
+2. Click nút ""Đăng nhập""","1. Hiển thị thông báo ""Đăng nhập thành công""
+2. Redirect về trang chủ
+3. Hiển thị thông tin người dùng",,,
+4,TC_AUTH_004,Đăng nhập,Đăng nhập thất bại do sai mật khẩu,High,"- Đã có tài khoản","1. Truy cập trang /auth/dangnhap","1. Nhập email đúng, mật khẩu sai
+2. Click nút ""Đăng nhập""","1. Hiển thị thông báo ""Email hoặc mật khẩu không đúng""
+2. Vẫn ở lại trang đăng nhập",,,
+5,TC_AUTH_005,Đăng xuất,Đăng xuất thành công,High,"- Đã đăng nhập","1. Click vào nút ""Đăng xuất""","1. Chờ xử lý","1. Redirect về trang đăng nhập
+2. Session và cookie bị xóa",,,
+6,TC_MOVIE_001,Xem danh sách phim,Xem danh sách phim thành công,High,"- Đã đăng nhập","1. Truy cập trang chủ /home","1. Chờ trang load xong","1. Hiển thị danh sách phim
+2. Mỗi phim hiển thị:
+- Poster
+- Tên phim
+- Thể loại
+- Thời lượng
+- Giá vé",,,
+7,TC_MOVIE_002,Xem chi tiết phim,Xem chi tiết phim thành công,High,"- Đã đăng nhập","1. Click vào một phim trong danh sách","1. Chờ trang load xong","1. Hiển thị đầy đủ thông tin phim:
+- Poster
+- Tên phim
+- Đạo diễn
+- Diễn viên
+- Thể loại
+- Thời lượng
+- Ngày khởi chiếu
+- Mô tả
+- Giá vé",,,
+8,TC_MOVIE_003,Xem chi tiết phim,Xem chi tiết phim không tồn tại,High,"- Đã đăng nhập","1. Truy cập URL /movie-details/123456789","1. Chờ trang load xong","1. Hiển thị thông báo ""Phim không tồn tại""
+2. Redirect về trang chủ",,,
+9,TC_MOVIE_004,Thêm phim,Thêm phim mới thành công,High,"- Đã đăng nhập với quyền admin","1. Truy cập trang thêm phim","1. Nhập thông tin phim
+2. Upload poster
+3. Click nút ""Lưu""","1. Hiển thị thông báo ""Thêm phim thành công""
+2. Phim xuất hiện trong danh sách",,,
+10,TC_MOVIE_005,Xóa phim,Xóa phim thành công,High,"- Đã đăng nhập với quyền admin
+- Phim chưa có suất chiếu","1. Truy cập trang quản lý phim
+2. Click nút ""Xóa"" của một phim","1. Xác nhận xóa","1. Hiển thị thông báo ""Xóa thành công""
+2. Phim biến mất khỏi danh sách",,,
+11,TC_THEATER_001,Xem danh sách rạp,Xem danh sách rạp thành công,High,"- Đã đăng nhập","1. Truy cập trang quản lý rạp","1. Chờ trang load xong","1. Hiển thị danh sách rạp
+2. Mỗi rạp hiển thị:
+- Tên rạp
+- Địa chỉ
+- Số phòng",,,
+12,TC_THEATER_002,Thêm rạp,Thêm rạp mới thành công,High,"- Đã đăng nhập với quyền admin","1. Truy cập trang thêm rạp","1. Nhập thông tin rạp
+2. Click nút ""Lưu""","1. Hiển thị thông báo ""Thêm rạp thành công""
+2. Rạp xuất hiện trong danh sách",,,
+13,TC_THEATER_003,Xem danh sách phòng,Xem danh sách phòng thành công,High,"- Đã đăng nhập","1. Truy cập trang quản lý phòng","1. Chờ trang load xong","1. Hiển thị danh sách phòng
+2. Mỗi phòng hiển thị:
+- Tên phòng
+- Số ghế
+- Loại phòng",,,
+14,TC_THEATER_004,Thêm phòng,Thêm phòng mới thành công,High,"- Đã đăng nhập với quyền admin","1. Truy cập trang thêm phòng","1. Nhập thông tin phòng
+2. Click nút ""Lưu""","1. Hiển thị thông báo ""Thêm phòng thành công""
+2. Phòng xuất hiện trong danh sách",,,
+15,TC_THEATER_005,Xóa phòng,Xóa phòng thành công,High,"- Đã đăng nhập với quyền admin
+- Phòng chưa có suất chiếu","1. Truy cập trang quản lý phòng
+2. Click nút ""Xóa"" của một phòng","1. Xác nhận xóa","1. Hiển thị thông báo ""Xóa thành công""
+2. Phòng biến mất khỏi danh sách",,,
+16,TC_SEAT_001,Xem danh sách ghế,Xem danh sách ghế thành công,High,"- Đã đăng nhập","1. Truy cập trang quản lý ghế","1. Chờ trang load xong","1. Hiển thị sơ đồ ghế
+2. Mỗi ghế hiển thị:
+- Vị trí
+- Loại ghế
+- Trạng thái",,,
+17,TC_SEAT_002,Chọn ghế,Chọn ghế thành công,High,"- Đã đăng nhập
+- Đã chọn phim/rạp/phòng","1. Click vào ghế trống","1. Chọn số lượng ghế cần đặt","1. Ghế được đánh dấu đã chọn
+2. Hiển thị tổng tiền",,,
+18,TC_SEAT_003,Chọn ghế,Chọn ghế đã được đặt,High,"- Đã đăng nhập
+- Ghế đã được đặt","1. Click vào ghế đã được đặt","1. Thử chọn ghế","1. Hiển thị thông báo ""Ghế đã được đặt""
+2. Không thể chọn ghế",,,
+19,TC_SEAT_004,Thêm ghế,Thêm ghế mới thành công,High,"- Đã đăng nhập với quyền admin","1. Truy cập trang thêm ghế","1. Nhập thông tin ghế
+2. Click nút ""Lưu""","1. Hiển thị thông báo ""Thêm ghế thành công""
+2. Ghế xuất hiện trong sơ đồ",,,
+20,TC_SEAT_005,Xóa ghế,Xóa ghế thành công,High,"- Đã đăng nhập với quyền admin
+- Ghế chưa được đặt","1. Truy cập trang quản lý ghế
+2. Click nút ""Xóa"" của một ghế","1. Xác nhận xóa","1. Hiển thị thông báo ""Xóa thành công""
+2. Ghế biến mất khỏi sơ đồ",,,
+21,TC_BOOK_001,Chọn phim/rạp/phòng,Chọn thành công,High,"- Đã đăng nhập","1. Click nút ""Đặt vé"" trên trang chi tiết phim","1. Chọn rạp
+2. Chọn phòng
+3. Chọn suất chiếu","1. Hiển thị danh sách rạp/phòng/suất chiếu khả dụng
+2. Có thể chọn tiếp tục",,,
+22,TC_BOOK_002,Xác nhận đặt vé,Xác nhận thành công,High,"- Đã chọn ghế","1. Click nút ""Tiếp tục""","1. Xem lại thông tin đặt vé
+2. Click nút ""Xác nhận""","1. Hiển thị thông tin đặt vé:
+- Thông tin phim
+- Thông tin rạp/phòng
+- Thông tin ghế
+- Tổng tiền
+2. Có nút ""Thanh toán""",,,
+23,TC_BOOK_003,Hủy đặt vé,Hủy thành công,High,"- Đã xác nhận đặt vé","1. Click nút ""Hủy""","1. Xác nhận hủy","1. Hiển thị thông báo ""Hủy đặt vé thành công""
+2. Ghế được giải phóng",,,
+24,TC_BOOK_004,Xem lịch sử đặt vé,Xem thành công,High,"- Đã đăng nhập
+- Đã có vé đã đặt","1. Truy cập trang thông tin cá nhân
+2. Click tab ""Lịch sử đặt vé""","1. Chờ trang load xong","1. Hiển thị danh sách vé đã đặt:
+- Tên phim
+- Rạp
+- Ngày chiếu
+- Ghế
+- Giá vé
+- Trạng thái",,,
+25,TC_BOOK_005,Tìm kiếm vé,Tìm kiếm thành công,High,"- Đã đăng nhập","1. Truy cập trang lịch sử đặt vé
+2. Nhập thông tin tìm kiếm","1. Click nút ""Tìm kiếm""","1. Hiển thị danh sách vé phù hợp với điều kiện tìm kiếm",,,
+26,TC_PAY_001,Thanh toán MoMo,Tạo thanh toán thành công,High,"- Đã xác nhận đặt vé","1. Click nút ""Thanh toán""","1. Chọn phương thức MoMo
+2. Click ""Thanh toán""","1. Redirect đến trang thanh toán MoMo
+2. Hiển thị thông tin thanh toán",,,
+27,TC_PAY_002,Thanh toán MoMo,Thanh toán thành công,High,"- Đã tạo thanh toán MoMo","1. Hoàn tất thanh toán trên MoMo","1. Quay về trang web","1. Hiển thị trang ""Thanh toán thành công""
+2. Gửi email xác nhận
+3. Cập nhật trạng thái ghế",,,
+28,TC_PAY_003,Thanh toán MoMo,Thanh toán thất bại,High,"- Đã tạo thanh toán MoMo","1. Hủy thanh toán trên MoMo","1. Quay về trang web","1. Hiển thị trang ""Thanh toán thất bại""
+2. Ghế được giải phóng
+3. Có nút ""Thử lại""",,,
+29,TC_PAY_004,Xem doanh thu,Xem thành công,High,"- Đã đăng nhập với quyền admin","1. Truy cập trang quản lý doanh thu","1. Chọn khoảng thời gian
+2. Click nút ""Xem báo cáo""","1. Hiển thị biểu đồ doanh thu
+2. Hiển thị danh sách chi tiết các giao dịch",,,
+30,TC_PAY_005,Xuất báo cáo,Xuất thành công,High,"- Đã đăng nhập với quyền admin","1. Truy cập trang quản lý doanh thu
+2. Chọn khoảng thời gian","1. Click nút ""Xuất báo cáo""","1. Tải xuống file báo cáo Excel
+2. File chứa đầy đủ thông tin doanh thu",,, 

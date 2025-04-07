@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập Thành Công</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome (cho icon) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2Lw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            /* Hình nền từ thư mục */
+            background: url('images/background_login_register/background.png') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .success-container {
+            background: #2d2d2d; /* Màu xám đậm giống Galaxy Play */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 2; /* Đảm bảo container nằm trên lớp phủ */
+        }
+
+        .success-container i {
+            color: #28a745; /* Màu xanh lá cho icon thành công */
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-container h2 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-primary {
+            background: #e50914; /* Đỏ đặc trưng của Galaxy Play */
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background: #f40612; /* Đỏ sáng hơn khi hover */
+        }
+
+        /* Responsive */
+        @media (max-width: 576px) {
+            .success-container {
+                padding: 20px;
+                max-width: 90%;
+            }
+
+            .success-container h2 {
+                font-size: 1.3rem;
+            }
+
+            .success-container i {
+                font-size: 2rem;
+            }
+
+            .btn-primary {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <i class="fas fa-check-circle"></i>
+        <h2>Đăng Nhập Thành Công!</h2>
+        <a href="/home" class="btn btn-primary">Về Trang Chủ</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

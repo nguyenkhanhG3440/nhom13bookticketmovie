@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiển Thị Ghế</title>
+    <style>
+        body {
+            background-color: #1a1a1a; /* Nền tối để phù hợp với chủ đề rạp chiếu phim */
+            color: #ffffff; /* Chữ trắng để nổi trên nền tối */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 40px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Thêm bóng cho tiêu đề */
+        }
+
+        .seats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex; /* Sử dụng flexbox để hiển thị ghế theo hàng ngang */
+            flex-wrap: wrap; /* Cho phép ghế xuống dòng nếu không đủ chỗ */
+            gap: 12px; /* Khoảng cách giữa các ghế */
+            justify-content: center; /* Căn giữa các ghế */
+        }
+
+        .seat {
+            background-color: #3a3a3a; /* Màu nền mặc định cho ghế */
+            color: #ffffff;
+            padding: 12px 18px;
+            text-align: center;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            min-width: 90px; /* Kích thước tối thiểu của ghế */
+            transition: all 0.3s ease; /* Hiệu ứng mượt mà */
+            cursor: pointer;
+            border: 1px solid #555; /* Viền nhẹ để phân biệt */
+        }
+
+        /* Phân biệt loại ghế bằng màu sắc */
+        .seat[data-loai="Thuong"] {
+            background-color: #0e629a !important; /* Ghế thường: màu xám */
+        }
+
+        .seat[data-loai="VIP"] {
+            background-color: #e74c3c; /* Ghế VIP: màu đỏ */
+        }
+
+        .seat[data-loai="Doi"] {
+            background-color: #f1c40f; /* Ghế đôi: màu vàng */
+        }
+
+        /* Hiệu ứng hover */
+        .seat:hover {
+            transform: scale(1.05); /* Phóng to nhẹ khi hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Thêm bóng */
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .seat {
+                min-width: 70px;
+                padding: 10px 12px;
+                font-size: 12px;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin: 30px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+    <h1>Danh sách Ghế</h1>
+    <div class="seats-container">
+        <% ghes.forEach(ghe => { %>
+            <div class="seat" data-loai="<%= ghe.loaiGhe %>" data-booked="<%= ghe.daDat || false %>">
+                <%= ghe.maGhe %> - <%= ghe.loaiGhe %>
+            </div>
+        <% }); %>
+    </div>
+
+    <%- include('../partials/footer') %>
+</body>
+</html>

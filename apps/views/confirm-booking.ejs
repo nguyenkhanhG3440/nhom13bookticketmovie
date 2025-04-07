@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác nhận đặt vé - Galaxy Play</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #141414; /* Màu nền tối giống Galaxy Play */
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 850px; /* Chiều rộng lớn hơn, giống Galaxy Play */
+            background: #1c1c1c; /* Màu nền tối nhạt hơn */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e50914; /* Màu đỏ đặc trưng của Galaxy Play */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 20px;
+            background: transparent;
+            border: none;
+        }
+
+        .poster {
+            width: 150px; /* Poster lớn hơn một chút */
+            height: auto;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .poster:hover {
+            transform: scale(1.1); /* Hiệu ứng phóng to khi hover */
+        }
+
+        .info-section {
+            flex: 1;
+        }
+
+        h4, h5 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #ffffff;
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        h4 span, h5 span {
+            color: #e50914; /* Điểm nhấn đỏ */
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 0.9rem;
+            color: #aaaaaa; /* Màu xám nhạt cho chữ phụ */
+            margin-bottom: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 12px; /* Khoảng cách giữa các ghế */
+        }
+
+        ul li {
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+
+        ul li span {
+            background-color: #e50914; /* Màu đỏ cho ghế */
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-left: 5px;
+        }
+
+        .btn-confirm {
+            background-color: #e50914; /* Nút đỏ đặc trưng */
+            border: none;
+            font-weight: bold;
+            font-size: 1rem;
+            padding: 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            max-width: 250px; /* Nút rộng vừa phải */
+            margin: 20px auto 0; /* Căn giữa nút */
+            display: block;
+        }
+
+        .btn-confirm:hover {
+            background-color: #c10812; /* Đậm hơn khi hover */
+        }
+
+        .text-warning {
+            color: #e50914 !important;
+        }
+
+        .text-info {
+            color: #092ae5 !important; /* Đồng bộ màu đỏ */
+        }
+    </style>
+</head>
+<body>
+    <form id="confirmForm" method="POST" action="/payment/create-momo-payment">
+        <input type="hidden" name="phimId" value="<%= phim._id %>">
+        <input type="hidden" name="rapId" value="<%= rap._id %>">
+        <input type="hidden" name="phongId" value="<%= phong._id %>">
+        <input type="hidden" name="suatChieuId" value="<%= suatChieu._id %>">
+        <input type="hidden" name="totalPrice" value="<%= totalPrice %>">
+        <input type="hidden" name="danhSachGhe" value="<%= JSON.stringify(gheDaChon.map(ghe => ghe._id)) %>">
+
+        <div class="container text-white">
+            <h2 class="animate__animated animate__fadeIn">Xác nhận thông tin đặt vé</h2>
+
+            <div class="card">
+                <img src="<%= phim.posterUrl %>" alt="<%= phim.title %>" class="poster">
+                
+                <div class="info-section">
+                    <h4>Phim: <span class="text-warning"><%= phim.title %></span></h4>
+                    <h5>Rạp: <span class="text-warning"><%= rap.ten %></span></h5>
+                    <h5>Phòng: <span class="text-warning"><%= phong.tenPhong %></span></h5>
+
+                    <h5>Suất chiếu:</h5>
+                    <p>
+                        Bắt đầu: <%= new Date(suatChieu.ngayGioBatDau).toLocaleString('vi-VN') %><br>
+                        Kết thúc: <%= new Date(suatChieu.ngayGioKetThuc).toLocaleString('vi-VN') %>
+                    </p>
+
+                    <h5>Ghế đã chọn:</h5>
+                    <ul>
+                        <% gheDaChon.forEach(ghe => { %>
+                            <li>Ghế số: <span class="badge text-info"><%= ghe.maGhe %></span></li>
+                        <% }) %>
+                    </ul>
+
+                    
+<h5>Tổng tiền:</h5>
+<p>
+    <strong>Phim:</strong> <%= phim.gia.toLocaleString() %> VND<br>
+    <strong>Giá ghế:</strong> <%= totalSeatPrice.toLocaleString() %> VND<br>
+    <strong>Tổng cộng:</strong> <span class="text-warning"><%= totalPrice.toLocaleString() %> VND</span>
+</p>
+
+                    <button type="submit" class="btn btn-confirm animate__animated animate__pulse animate__infinite">Xác nhận đặt vé</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

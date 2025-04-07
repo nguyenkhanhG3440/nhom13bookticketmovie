@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Statistics</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+
+    <div class="p-6 max-w-6xl mx-auto space-y-8">
+        <h1 class="text-3xl font-bold text-center">📊 Revenue Statistics</h1>
+
+        <!-- Total Revenue -->
+        <div class="bg-blue-100 rounded-lg p-4 shadow">
+            <h2 class="text-xl font-semibold mb-2">Total Revenue</h2>
+            <% if (totalRevenue) { %>
+                <div class="text-lg space-y-1">
+                    <p><strong>Revenue:</strong> <%= totalRevenue.totalRevenue.toLocaleString() %> VND</p>
+                    <p><strong>Total Tickets Sold:</strong> <%= totalRevenue.totalTicketsSold %></p>
+                </div>
+            <% } else { %>
+                <p>Loading...</p>
+            <% } %>
+        </div>
+
+        <!-- Revenue by Day -->
+        <div class="bg-white rounded-lg p-4 shadow">
+            <h2 class="text-xl font-semibold mb-4">🗓️ Revenue by Day</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full table-auto border text-sm">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="border p-2">Date</th>
+                            <th class="border p-2">Revenue</th>
+                            <th class="border p-2">Tickets Sold</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (revenueByDay.length > 0) { %>
+                            <% revenueByDay.forEach(item => { %>
+                                <tr class="text-center">
+                                    <td class="border p-2"><%= `${item._id.day}/${item._id.month}/${item._id.year}` %></td>
+                                    <td class="border p-2"><%= item.totalRevenue.toLocaleString() %> VND</td>
+                                    <td class="border p-2"><%= item.totalTicketsSold %></td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="3" class="text-center p-2">No data available</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Revenue by Movie -->
+        <div class="bg-white rounded-lg p-4 shadow">
+            <h2 class="text-xl font-semibold mb-4">🎬 Revenue by Movie</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full table-auto border text-sm">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="border p-2">Movie Title</th>
+                            <th class="border p-2">Revenue</th>
+                            <th class="border p-2">Tickets Sold</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (revenueByMovie.length > 0) { %>
+                            <% revenueByMovie.forEach(item => { %>
+                                <tr class="text-center">
+                                    <td class="border p-2"><%= item.movieName %></td>
+                                    <td class="border p-2"><%= item.totalRevenue.toLocaleString() %> VND</td>
+                                    <td class="border p-2"><%= item.totalTicketsSold %></td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="3" class="text-center p-2">No data available</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
